@@ -1,0 +1,94 @@
+/* Formatting text on page */
+
+html {
+  font-family: "Helvetica", sans-serif;
+}
+
+
+/* Formatting the homepage selection of images into three columns */
+/* inspiration for gallery on homepage from Fullyworld Web Tutorials Responsive Image Gallery (but decided not to make cols responsive i.e. less cols
+   as the screen got smaller as it made the page too long for my liking for a homepage) */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.col {
+  flex: 25%;
+  max-width: 33.33%;
+  padding: 0 4px;
+}
+
+.col img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+#assortimg {
+  background-color: white;
+}
+
+.col img:hover {
+  filter: invert(1);
+}
+
+
+/* Formatting JESSKETCHES image and bright fashion image to move off screen as the user scrolls using javascript and CSS */
+
+#bptee {
+  border-radius: 3px;
+  width: 50%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+#jk {
+  z-index: -1;
+  position: relative;
+}
+
+
+/* Formatting items relevant to the loading 'page' */
+
+#grumpy_cat {
+  width: 20%;
+  height: auto;
+}
+
+#loading {
+  text-align: center;
+}
+
+/* Add animation to "page content" to load in an upwards motion once all content is ready to be shown */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+#content {
+  display: none;
+}

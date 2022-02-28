@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Own Style Sheet using CSS -->
+    <link href="static/styleshomepage.css" rel="stylesheet">
+    <link href="static/stylessitewide.css" rel="stylesheet">
+
+    <title>JESSKETCHES</title>
+
+    <!-- Linking JESSKETCHES logo for the favicon -->
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </head>
+  <body onload="showPage()">
+    <div id="loading">
+      <div class="row"><h1 class="mt-5" style="background-color: yellow;">LOADING...</h1><h2 class="mb-5">This better be worth the wait</h2></div>
+      <div><img src="/static/grumpy_cat_circle.png" alt="line drawing of a grumpy cat" id="grumpy_cat" class="img-fluid"></div>
+    </div>
+    <div style="display:none;" id="content" class="animate-bottom">
+      <!-- Top navigation bar -->
+      <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+        <div class="container-fluid">
+          <a class="navbar-brand" aria-current="page" href="/">
+            <img src="/static/jsklogo.png" width="40" height="40" class="d-inline-block align-top" alt="JESSKETCHES logo, homepage link" loading="lazy">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  WORK
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="/ACCEPTANCE">ACCEPTANCE</a></li>
+                  <li><a class="dropdown-item" href="/C19">C19</a></li>
+                  <li><a class="dropdown-item" href="/COMMISSIONS">COMMISSIONS</a></li>
+                  <li><a class="dropdown-item" href="/DREAMLAND">DREAMLAND</a></li>
+                  <li><a class="dropdown-item" href="/FASHUN">FASHUN</a></li>
+                  <li><a class="dropdown-item" href="/FLORAL+">FLORAL+</a></li>
+                  <li><a class="dropdown-item" href="/INTERIORS">INTERIORS</a></li>
+                  <li><a class="dropdown-item" href="/JUSTJUMP">JUST JUMP</a></li>
+                  <li><a class="dropdown-item" href="/PEOPLE&PLACES:LONDON">PEOPLE&PLACES: LONDON</a></li>
+                  <li><a class="dropdown-item" href="/SOMEBODIES">SOMEBODIES</a></li>
+                  <li><a class="dropdown-item" href="/TATTOO">TATTOO</a></li>
+                  <li><a class="dropdown-item" href="/THREAD">THREAD</a></li>
+                  <li><a class="dropdown-item" href="/X(R)PLORATION">X(R)PLORATION</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/ABOUT_ME">ABOUT ME</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/CONTACT">CONTACT</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/SHOP">SHOP</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Fixed footer link to instagram page -->
+      <ul class="nav justify-content-end fixed-bottom">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.instagram.com/jess.ketches/">
+            <i class="bi bi-instagram" role="img" aria-label="Instagram Link" style="font-size:1.5rem;"></i>
+          </a>
+        </li>
+      </ul>
+
+      <div class="container-fluid">
+        <div class="row">
+          <!-- JESSKETCHES name -->
+          <img src="/static/jskname.png" alt="JESSKETCHES" id="jk">
+        </div>
+        <div class="row">
+          <!-- Bold Print Tee full size image -->
+          <img src="/static/WORK/FASHUN/bold_print_tee.png" id="bptee"
+          alt="Photograph of the artist wearing a large white vintage shirt with bright bold graphic prints on in orange, yellow, purple, red and
+          green. The artist has continued these graphic patterns onto her body using make-up on her bare face, arms and legs. She is facing the
+          camera, with her left arm reached up and behind her head. Further graphical imagery to mimic the shirt was drawn on digitally to the left
+          and right sides of the photograph.">
+        </div>
+      </div>
+
+      <!-- Javascript to animate the top two images as user scrolls up/down the page -->
+      <script type="text/javascript">
+        window.addEventListener('scroll', function(){
+          var value = window.scrollY;
+
+          document.getElementById("jk").style.transform = "translateX(" + (value * -0.9) + "px)";
+          document.getElementById("bptee").style.transform = "translateX(" + (value * 0.9) + "px)";
+
+        })
+      </script>
+
+      <!-- Assortment of images -->
+      <div class="container-fluid" id="assortimg">
+        <div class="row">
+
+          <!-- Assortment of images col 1 -->
+          <div class="col">
+            <a href="/PEOPLE&PLACES:LONDON">
+              <img src="/static/WORK/PEOPLE&PLACES-LONDON/london_bicycle_rack.jpeg"
+              alt="Greyscale photograph of a line of singular bicycle rails on the side of a pavement, with their shadows reaching across towards
+              the left of the image.">
+            </a>
+            <a href="/ACCEPTANCE">
+              <img src="/static/WORK/ACCEPTANCE/faded.jpeg"
+              alt="Self portrait on a cream coloured background of the artists face looking bewildered and exhausted. Face and shoulders outlined in
+              pencil, with the background surrounding her painted a translucent white using acrylic paints.">
+            </a>
+            <a href="/FLORAL+">
+              <img src="/static/WORK/FLORAL/golden_leaves.jpeg"
+              alt="Photograph looking upwards toward the golden autumn leaves on a tree, with a clear bright blue sky.">
+            </a>
+            <a href="/C19">
+              <img src="/static/WORK/C19/sitting,waiting,thinking.jpeg"
+              alt="Pen drawing using black pen of a wooden figure leaning against a green object that fades away as you look down the page. The
+            figure is looking down slightly hunched over.">
+            </a>
+            <a href="/DREAMLAND">
+             <img src="/static/WORK/DREAMLAND/mirror.jpeg"
+              alt="An acrylic painting using a graphical block style presents a naked woman from the waist up walking sideways off to the right of
+              the canvas with her head facing the viewer. She is painted light blue, with proportionally large brown curly hair placed with red and
+              purple flowers. She has a yellow patterned blanket wrapped around both arms that floats off the left side of the canvas. The rest of
+              the background is made up of flora, graphical shapes, and a sun. The colours used are yellow, light blues, deep purple, red, greens,
+              along with black and white.">
+            </a>
+            <a href="/PEOPLE&PLACES:LONDON">
+              <img src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P1.jpeg"
+              alt="Black ink line drawing on white paper of a person walking towards the right side of the paper, in a blazer and trousers with long
+              wavy hair. A large plant pot with a tree and long grass-like greenery inside is behind the person in the right hand-side of the drawing.">
+            </a>
+            <a href="/X(R)PLORATION">
+              <img src="/static/WORK/X(R)PLORATION/consumption-what_a_waste.png"
+              alt="A collage on white paper of the earth being picked up using a cutlery fork. The text ‘what a waste’ is written partially over the
+              earth using stamps.">
+            </a>
+            <a href="/TATTOO">
+              <img src="/static/WORK/TATTOO/out_of_the_woods.jpeg"
+              alt="Black ink on white paper. Within the outline of a triangle where the top side is parallel to the top of the paper, there are woods
+              within the left hand side of the triangle, and an open field in the right. Above the open field is a large circle symbolising the sun,
+              which has a bird flying by in the middle left corner.">
+            </a>
+            <a href="/C19">
+              <img src="/static/WORK/C19/time2.jpeg"
+              alt="Pencil drawing on white paper of two candles and their candle holders. The candle holders are shaped like musical notes with
+              the bulbous candles sitting from the middle of the structures.">
+            </a>
+          </div>
+
+          <!-- Assortment of images col 2 -->
+          <div class="col">
+            <a href="/C19">
+              <img src="/static/WORK/C19/Els.jpeg"
+              alt="Pencil drawing of trainers and ankles, from the perspective of sitting next to the person with their legs stretched out in
+              front of themselves. Feet are upright on a floor of grass and little yellow buttercup flowers. The colours have been added using
+              pencils and watercolour, and are overly vibrant compared to reality. The trainers have an orange rim, purple laces and a purple
+              tongue, with a white body, and the socks are neon blue.">
+            </a>
+            <a href="/DREAMLAND">
+              <img src="/static/WORK/DREAMLAND/timetravelling.jpeg"
+              alt="Cutting of a mother holding a child's hands and spinning them around placed on top of an image of space with clusters of light
+              red, blue and purple shining dots.">
+            </a>
+            <a href="/JUSTJUMP">
+              <img src="/static/WORK/JUSTJUMP/edge_of_the_earth.jpeg"
+              alt="A painting of a naked woman jumping off of a blue object whose corner spans the bottom of the paper. The woman is facing away
+              from the viewer, with her arms stretched out as she leaps. She is painted in gold, with black hair, and a black outline to shape her
+              body. All colour is in block, there is no shading.">
+            </a>
+            <a href="/C19">
+              <img src="/static/WORK/C19/park_paradise.jpeg"
+              alt="Drawing using black charcoal on white paper of a single tree in the centre, with grass and bushes in the bottom tenth of the paper.">
+            </a>
+            <a href="/FLORAL+">
+              <img src="/static/WORK/FLORAL/floral_close-up1.jpeg"
+              alt="Small cropped section of photograph of a flower with white petals and sprays of bright pink.">
+            </a>
+            <a href="/PEOPLE&PLACES:LONDON">
+              <img src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_neals_yard.jpeg"
+              alt="Black ink line drawing on white paper of three figures near a Neals Yard shop. The closest is walking away from the viewer on the
+              left hand side, and on the right one person is perched on a bicycle outside the shop, near someone taking a photo on her phone by the
+              ‘£10 OFF’ sign.">
+            </a>
+            <a href="/PEOPLE&PLACES:LONDON">
+              <img src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P13.jpeg"
+              alt="Black ink line drawing with added grey pen on white paper of a someone walking away from the viewer down a street, with papers in
+              their hand. They are wearing a jacket with the words ‘BUT LEARN TO TRUST YOUR HEART’ written on a sewn on fabric on the back of the
+              jacket, jeans, and trainers.">
+            </a>
+            <a href="/THREAD">
+              <img src="/static/WORK/THREAD/peace_dove.jpeg"
+              alt="A photograph of people sat on the floor and moving around by a wired fence. The fence has three dove designs attached to it,
+              along with other photos and/or writing. The doves have been embroidered around their outlines with light lilac thread, with some of
+              the tails of the doves having thread left hanging out. One person’s woolly hat has also been embroidered with a deep pink thread.">
+            </a>
+            <a href="/SOMEBODIES">
+              <img src="/static/WORK/SOMEBODIES/virtual_life_drawing_class2.jpeg"
+              alt="A pencil sketch of a naked woman reclining towards the right with her back facing the viewer. She has her hair tied up in a messy bun,
+              and is looking off towards the left.">
+            </a>
+          </div>
+
+          <!-- Assortment of images col 3 -->
+          <div class="col">
+            <a href="/SOMEBODIES">
+              <img src="/static/WORK/SOMEBODIES/cycles-labour.jpeg"
+              alt="Acrylic painting made up of two portraits of a woman in labour, with a black border around each portrait splitting the canvas in
+              half. The left portrait appears to be upside down, or looking from above and behind a woman lying on her back; her head is at the bottom
+              facing upward with her forehead scrunched and eyes pressed closed, her nose and mouth are slightly scrunched also. Her chest is bare. The
+              right portrait shows the same woman with a more intense expression. Her head is in the top right facing towards the left, her eyes and nose
+              are as tightly scrunched as they could be, with her teeth clenched. Her shadow takes the right hand side of the image back to black before
+              hitting the border.">
+            </a>
+            <a href="/ACCEPTANCE">
+              <img src="/static/WORK/ACCEPTANCE/acceptance.jpeg"
+              alt= "Photograph of the artists face, who is looking directly into the camera. Her face spans the width and height of the photo, there is
+              minimal background which is a light blue. Two lines of deep blue paint are dripping down her face.">
+            </a>
+            <a href="/JUSTJUMP">
+              <img src="/static/WORK/JUSTJUMP/exploration_thoughts.jpeg"
+              alt="A pen drawing using a black biro of a naked woman covered by a blanket, who is sat up in bed with her arms hugging her stomach
+              whilst holding the blanket over her chest, and one bent knee visible from underneath the blanket. Her hair is messy, and face appears
+              pensive. She is surrounded by a golden background coloured in using pencil, along with some gold patches on her blanket which appear
+              to be made up of lots of small patches of cloth.">
+            </a>
+            <a href="/PEOPLE&PLACES:LONDON">
+              <img src="/static/WORK/PEOPLE&PLACES-LONDON/PEOPLE&PLACES-LONDON-GRAPHIC_EDITS/the_sun_will_rise.jpeg"
+              alt="Black ink line drawing on white paper of a person sat cross legged facing away from the viewer, with their arms on their knees.
+              They have dark curly hair, and are wearing a leather jacket, a top tucked into their jeans and the sole of their shoes are criss cross
+              patterned. The top half of the image is yellow, with white text, and the bottom half is white with yellow text. The text reads ‘THE SUN
+              WILL RISE’.">
+            </a>
+            <a href="/FLORAL+">
+              <img src="/static/WORK/FLORAL/exit.jpeg"
+              alt="Photograph of the exit to the large greenhouse, as the sun was setting, causing long shadows along the walkway from the
+              panelling in the doors. There is an archway of greenery on the left and right of the image as the camera looks towards the door.">
+            </a>
+            <a href="/FLORAL+">
+              <img src="/static/WORK/FLORAL/snap.jpeg"
+              alt="A line drawing using a black pen of the woman taking a photograph of some flowers in the photograph ‘Beautiful Sam, 2020’.
+              The line drawing is surrounded by horizontal stripes of a rainbow of colours using crayons, as if she were taking a photograph of
+              something she saw as magical, or out of this world.">
+            </a>
+            <a href="/DREAMLAND">
+              <img src="/static/WORK/DREAMLAND/Gordon_the_gecko.jpeg"
+              alt="Collage of a gecko on a white background. Gecko is made up of cuttings of animals, countryside, cities, and humans in an
+              order that creates the overall image of a gecko.">
+            </a>
+            <a href="/X(R)PLORATION">
+              <img src="/static/WORK/X(R)PLORATION/we're_toast.jpeg"
+              alt="A collage on white paper of Boris Johnson popping out of a toaster with both thumbs up in the air. Boris is surrounded by strips of
+              water, land and sky coming out from behind him towards the outer perimeter of the paper.">
+            </a>
+            <a href="/X(R)PLORATION">
+              <img src="/static/WORK/X(R)PLORATION/XR_protest_truth_laid_bare.jpeg"
+              alt="A pencil drawing on white paper of a woman with a bare chest being carried away by three police officers, two holding each arm and one
+              holding her legs. She lays limp letting the police officers carry her full weight as she looks at the one holding her left arm. Her chest
+              has the world ‘violence’ writing across it.">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript for page loading -->
+    <script src="static/loading.js"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

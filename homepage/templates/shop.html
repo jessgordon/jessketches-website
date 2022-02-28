@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Shopping Cart Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Own Style Sheet using CSS -->
+    <link href="static/stylesshop.css" rel="stylesheet">
+    <link href="static/stylessitewide.css" rel="stylesheet">
+
+    <title>JESSKETCHES: SHOP</title>
+
+    <!-- Linking JESSKETCHES logo for the favicon -->
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </head>
+  <body>
+    <!-- Top navigation bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent flex-wrap">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/static/jsklogo.png" width="40" height="40" class="d-inline-block align-top" alt="JESSKETCHES logo, homepage link" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav">
+            <li class="nav-item dropdown mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                WORK
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/ACCEPTANCE">ACCEPTANCE</a></li>
+                <li><a class="dropdown-item" href="/C19">C19</a></li>
+                <li><a class="dropdown-item" href="/COMMISSIONS">COMMISSIONS</a></li>
+                <li><a class="dropdown-item" href="/DREAMLAND">DREAMLAND</a></li>
+                <li><a class="dropdown-item" href="/FASHUN">FASHUN</a></li>
+                <li><a class="dropdown-item" href="/FLORAL+">FLORAL+</a></li>
+                <li><a class="dropdown-item" href="/INTERIORS">INTERIORS</a></li>
+                <li><a class="dropdown-item" href="/JUSTJUMP">JUST JUMP</a></li>
+                <li><a class="dropdown-item" href="/PEOPLE&PLACES:LONDON">PEOPLE&PLACES: LONDON</a></li>
+                <li><a class="dropdown-item" href="/SOMEBODIES">SOMEBODIES</a></li>
+                <li><a class="dropdown-item" href="/TATTOO">TATTOO</a></li>
+                <li><a class="dropdown-item" href="/THREAD">THREAD</a></li>
+                <li><a class="dropdown-item" href="/X(R)PLORATION">X(R)PLORATION</a></li>
+              </ul>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/ABOUT_ME">ABOUT ME</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/CONTACT">CONTACT</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" aria-current="page" href="/SHOP">SHOP</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            {% if item != None %}
+              <li class="nav-item mx-1">
+                <a class="nav-link" href="/BASKET">
+                  <i class="bi bi-basket2-fill"></i>
+                  <span class='badge badge-warning' id='lblCartCount'>{{ item }}</span>
+                </a>
+              </li>
+            {% endif %}
+            <li class="nav-item dropdown ml-1 mr-5">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkLogIn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLinkLogIn">
+                {% if item != None %}
+                  <li><a class="dropdown-item" href="/BASKET">VIEW BASKET</a></li>
+                  <div class="dropdown-divider"></div>
+                {% endif %}
+                {% if logged_in == "no" %}
+                  <li><a class="dropdown-item" href="/LOGIN">LOG IN</a></li>
+                  <li><a class="dropdown-item" href="/REGISTER">REGISTER</a></li>
+                {% else %}
+                  <li><a class="dropdown-item" href="/BUYER_HX">VIEW SHOPPING HISTORY</a></li>
+                  <li><a class="dropdown-item" href="/LOGOUT">LOG OUT</a></li>
+                  <li class="dropdown-header">Currently logged in as {{ name }}</li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Fixed footer link to instagram page -->
+    <ul class="nav justify-content-end fixed-bottom">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.instagram.com/jess.ketches/">
+          <i class="bi bi-instagram" role="img" aria-label="Instagram Link" style="font-size:1.5rem;"></i>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Title of page -->
+    <div class="container-fluid" style="width: 70%; margin: auto;">
+      <div class="row">
+        <h1>SHOP</h1>
+        <h5>Proudly hand designed and printed by JESSKETCHES in her North West London studio.</h5><br>
+      </div>
+
+      <!-- Shop -->
+      <div class="row">
+        <div class="col-1">
+          <img class="img-fluid" src="/static/SHOP/arrow1.png" id="arrowl" alt="Arrow pointing down.">
+        </div>
+        <div class="col-10">
+          <img class="img-fluid rounded m-1" src="/static/SHOP/envelope.jpg" id="envelope"
+               alt="Photograph of an envelope with the JESSKETCHES logo (a styled letter 'J') on the lip.">
+        </div>
+        <div class="col-1">
+          <img class="img-fluid" src="/static/SHOP/arrow1.png" id="arrowr" alt="Arrow pointing down.">
+        </div>
+      </div>
+
+      <!-- Javascript to animate the envelope and arrows as user scrolls up/down the page -->
+      <script type="text/javascript">
+        window.addEventListener('scroll', function(){
+          var value = window.scrollY;
+          document.getElementById("arrowl").style.transform = "translateY(" + (value * 0.25) + "px)";
+          document.getElementById("envelope").style.transform = "translateY(" + (value * -1) + "px)";
+          document.getElementById("arrowr").style.transform = "translateY(" + (value * 0.25) + "px)";
+        })
+      </script>
+
+      <div id="pink_background">
+        <div class="row">
+          <h2 class="mt-5" style="background-color: yellow;">PEOPLE&PLACES: LONDON</h2>
+        </div>
+        <div class="row mt-3 mb-5">
+          <div class="col-md-8 col-12">
+            <div class="row">
+              <div class="col-md-3 col-sm-2 col-1"></div>
+              <div class="col-md-9 col-sm-10 col-11">
+                <img class="img-fluid rounded my-1" src="/static/SHOP/gift_floral_cards.jpg" alt="Photograph of one of the cards inside its envelope
+                with a handwritten tag attached to it with yellow thread, sat on a wooden table beside a vase of pink, purple and white sweet peas.">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-6" style="text-align: right;">
+                <br><h4 id="blurb">A selection of line drawings from Jess' People&Places: London edition, printed and placed
+                on cards for you to share with others.</h4>
+              </div>
+              <div class="col-sm-4 col-6">
+                <img class="img-fluid rounded mt-4 mb-1" src="/static/SHOP/boy_news_card.jpg" alt="Photograph of an illustration framed inside of a card with a black
+                border. The illustration is a black ink line drawing on white paper of a person in a reflective jacket placing newspapers from his trolley onto a
+                transportable rack which reads ‘FREE PLEASE TAKE ONE’. Around the illustration, text has been added digitally which reads: 'BOY DO WE HAVE NEWS
+                FOR YOU!'.">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-8">
+            <img class="img-fluid rounded my-1" src="/static/SHOP/heart_floral_card.jpg" alt="Photograph of an illustration framed inside of a card with a black
+            border. The card is standing on a wooden table next to a vase of pink, purple and white sweet peas. The illustration is a black ink line drawing
+            with added grey pen on white paper of a someone walking away from the viewer down a street, with papers in their hand. They are wearing jeans,
+            trainers and a jacket with the words ‘BUT LEARN TO TRUST YOUR HEART’ written on a sewn on fabric on the back of the jacket.">
+          </div>
+        </div>
+
+        <div id="PPLitems">
+
+          <!-- Item 1 -->
+          <div class="row my-3 item_break"></div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="container">
+                <img class="img-fluid rounded my-3 image" src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_kings_cross_canal_side.jpeg"
+                alt="Black ink line drawing with added grey pen on white paper of a brick tunnel with an archway leading to another tunnel which has
+                another archway which leads into darkness. There are circular lights by each archway.">
+                <div class="overlay">
+                  <img class="img-fluid rounded my-3 overlayimage" src="/static/SHOP/tunnel_card.jpg"
+                  alt="Photograph of Kings Cross canal side illustration on card.">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <br><h5 style="background-color: grey; color: white;"><em>KINGS CROSS CANAL SIDE</em>  2019</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Black ink line drawing with added grey pen on white paper of the archways leading out to part of the canal at Coal Drops Yard,
+                  Kings Cross.</p>
+                  <p style="font-size: 80%;">
+                    - Print framed in a 6 by 4 inches, 380gsm, cream card.<br><br>
+                    - The inside is left blank, for you to add your own message. Add message at checkout to send direct, or leave blank and send to
+                    yourself with a spare envelope.<br><br>
+                    - Printed on demand to reduce waste.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6>£2.75</h6>
+                  <p style="font-size: 80%;">10% Discount for 3 or more cards<br>20% Discount for 5 or more cards</p>
+                  <form action="/submission" method="post">
+                    <div class="form-group">
+                      <!-- Javascript to display text box for input of personalised message if this option is chosen on the drop-down menu -->
+                      <script type="text/javascript">
+                        function EnableDisableTextBox1(card_options) {
+                          var selectedValue = card_options.options[card_options.selectedIndex].id;
+                          var personalised_message = document.getElementById("personalised_messageKKCS2019");
+                          if (selectedValue == "print_plusKKCS2019") {
+                            personalised_message.style.display = "block";
+                          }
+                          else {
+                            personalised_message.style.display = "none";
+                          }
+                        }
+                      </script>
+                      <select name="card_options" id="card_options" onchange="EnableDisableTextBox1(this)">
+                        <option disabled selected value="select">Select a style</option>
+                        <option value="print" id="printKKCS2019">Print</option>
+                        <option value="print_plus" id="print_plusKKCS2019">Print Plus Personalised Message</option>
+                      </select><br>
+                      <input autocomplete="off" autofocus class="form-control" style="display: none;" id="personalised_messageKKCS2019" name="personalised_message"
+                             placeholder="Message - max 50 characters" type="text" maxlength="50">
+                      <select name="quantity" id="quantity">
+                        <option disabled selected value="quantity">Quantity</option>
+                        {% for number in quantity %}
+                          <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}
+                      </select><br>
+                      <input name="id" type="hidden" value="KKCS2019">
+                      <input name="cost" type="hidden" value="2.75">
+                      <input name="img_src" type="hidden" value="/static/WORK/PEOPLE&PLACES-LONDON/PPL_kings_cross_canal_side.jpeg">
+                      <button class="btn btn-primary mt-2" type="submit">Add to basket</button>
+                    </div>
+                  </form>
+                  <br><p style="font-size: 80%;"><i>'Print Plus Personalised Message' refers to the addition of text to the print itself - an example
+                  is photographed near the top of the page reading 'BOY DO WE HAVE NEWS FOR YOU!'. Jess will add your requested text herself before
+                  printing your card.</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3 item_break"></div>
+
+          <!-- Item 2 -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="container">
+                <img class="img-fluid rounded my-3 image" src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_phonebox.jpeg"
+                alt="Black ink line drawing with added grey pen on white paper of a London telephone box.">
+                <div class="overlay">
+                  <img class="img-fluid rounded my-3 overlayimage" src="/static/SHOP/phone_card.jpg" alt="Photograph of phonebox illustration on card.">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <br><h5 style="background-color: grey; color: white;"><em>TELEPHONE BOX</em>  2019</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Black ink line drawing with added grey pen on white paper of a London telephone box sat near the British Library.</p>
+                  <p style="font-size: 80%;">
+                    - Print framed in a 6 by 4 inches, 380gsm, cream card.<br><br>
+                    - The inside is left blank, for you to add your own message. Add message at checkout to send direct, or leave blank and send to
+                    yourself with a spare envelope.<br><br>
+                    - Printed on demand to reduce waste.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6>£2.75</h6>
+                  <p style="font-size: 80%;">10% Discount for 3 or more cards<br>20% Discount for 5 or more cards</p>
+                  <form action="/submission" method="post">
+                    <div class="form-group">
+                      <!-- Javascript to display text box for input of personalised message if this option is chosen on the drop-down menu -->
+                      <script type="text/javascript">
+                        function EnableDisableTextBox2(card_options) {
+                          var selectedValue = card_options.options[card_options.selectedIndex].id;
+                          var personalised_message = document.getElementById("personalised_messageTB2019");
+                          if (selectedValue == "print_plusTB2019") {
+                            personalised_message.style.display = "block";
+                          }
+                          else {
+                            personalised_message.style.display = "none";
+                          }
+                        }
+                      </script>
+                      <select name="card_options" id="card_options" onchange="EnableDisableTextBox2(this)">
+                        <option disabled selected value="select">Select a style</option>
+                        <option value="print" id="printTB2019">Print</option>
+                        <option value="print_plus" id="print_plusTB2019">Print Plus Personalised Message</option>
+                      </select><br>
+                      <input autocomplete="off" autofocus class="form-control" style="display: none;" id="personalised_messageTB2019" name="personalised_message"
+                             placeholder="Message - max 50 characters" type="text" maxlength="50">
+                      <select name="quantity" id="quantity">
+                        <option disabled selected value="quantity">Quantity</option>
+                        {% for number in quantity %}
+                          <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}
+                      </select><br>
+                      <input name="id" type="hidden" value="TB2019">
+                      <input name="cost" type="hidden" value="2.75">
+                      <input name="img_src" type="hidden" value="/static/WORK/PEOPLE&PLACES-LONDON/PPL_phonebox.jpeg">
+                      <button class="btn btn-primary mt-2" type="submit">Add to basket</button>
+                    </div>
+                  </form>
+                  <br><p style="font-size: 80%;"><i>'Print Plus Personalised Message' refers to the addition of text to the print itself - an example
+                  is photographed near the top of the page reading 'BOY DO WE HAVE NEWS FOR YOU!'. Jess will add your requested text herself before
+                  printing your card.</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3 item_break"></div>
+
+          <!-- Item 3 -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="container">
+                <img class="img-fluid rounded my-3 image" src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_paper.jpeg"
+                alt="Black ink line drawing on white paper of a person in a reflective jacket placing newspapers from his trolley onto a transportable
+                      rack which reads ‘FREE PLEASE TAKE ONE’.">
+                <div class="overlay">
+                  <img class="img-fluid rounded my-3 overlayimage" src="/static/SHOP/paper_card.jpg" alt="Photograph of paper illustration on card.">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <br><h5 style="background-color: grey; color: white;"><em>PAPER</em>  2019</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Black ink line drawing on white paper of a worker placing free newspapers from his trolley onto the rack near an underground
+                  station entrance.</p>
+                  <p style="font-size: 80%;">
+                    - Print framed in a 6 by 4 inches, 380gsm, cream card.<br><br>
+                    - The inside is left blank, for you to add your own message. Add message at checkout to send direct, or leave blank and send to
+                    yourself with a spare envelope.<br><br>
+                    - Printed on demand to reduce waste.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6>£2.75</h6>
+                  <p style="font-size: 80%;">10% Discount for 3 or more cards<br>20% Discount for 5 or more cards</p>
+                  <form action="/submission" method="post">
+                    <div class="form-group">
+                      <!-- Javascript to display text box for input of personalised message if this option is chosen on the drop-down menu -->
+                      <script type="text/javascript">
+                        function EnableDisableTextBox3(card_options) {
+                          var selectedValue = card_options.options[card_options.selectedIndex].id;
+                          var personalised_message = document.getElementById("personalised_messageP2019");
+                          if (selectedValue == "print_plusP2019") {
+                            personalised_message.style.display = "block";
+                          }
+                          else {
+                            personalised_message.style.display = "none";
+                          }
+                        }
+                      </script>
+                      <select name="card_options" id="card_options" onchange="EnableDisableTextBox3(this)">
+                        <option disabled selected value="select">Select a style</option>
+                        <option value="print" id="printP2019">Print</option>
+                        <option value="print_plus" id="print_plusP2019">Print Plus Personalised Message</option>
+                      </select><br>
+                      <input autocomplete="off" autofocus class="form-control" style="display: none;" id="personalised_messageP2019" name="personalised_message"
+                            placeholder="Message - max 50 characters" type="text" maxlength="50">
+                      <select name="quantity" id="quantity">
+                        <option disabled selected value="quantity">Quantity</option>
+                        {% for number in quantity %}
+                          <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}
+                      </select><br>
+                      <input name="id" type="hidden" value="P2019">
+                      <input name="cost" type="hidden" value="2.75">
+                      <input name="img_src" type="hidden" value="/static/WORK/PEOPLE&PLACES-LONDON/PPL_paper.jpeg">
+                      <button class="btn btn-primary mt-2" type="submit">Add to basket</button>
+                    </div>
+                  </form>
+                  <br><p style="font-size: 80%;"><i>'Print Plus Personalised Message' refers to the addition of text to the print itself - an example
+                  is photographed near the top of the page reading 'BOY DO WE HAVE NEWS FOR YOU!'. Jess will add your requested text herself before
+                  printing your card.</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3 item_break"></div>
+
+          <!-- Item 4 -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="container">
+                <img class="img-fluid rounded my-3 image" src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P10.jpeg"
+                alt="Black ink line drawing on white paper of someone sat on the steps near the canal, writing in a book. They have short
+                straight hair, a striped jumper and trainers">
+                <div class="overlay">
+                  <img class="img-fluid rounded my-3 overlayimage" src="/static/SHOP/canalside_floral_card.jpg"
+                  alt="Photograph of canal side writing illustration on card.">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <br><h5 style="background-color: grey; color: white;"><em>KINGS CROSS CANAL SIDE: WRITING</em>  2019</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Black ink line drawing on white paper of someone journaling whilst sat on the canalside steps at Coal Drops Yard, Kings Cross.</p>
+                  <p style="font-size: 80%;">
+                    - Print framed in a 6 by 4 inches, 380gsm, cream card.<br><br>
+                    - The inside is left blank, for you to add your own message. Add message at checkout to send direct, or leave blank and send to
+                    yourself with a spare envelope.<br><br>
+                    - Printed on demand to reduce waste.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6>£2.75</h6>
+                  <p style="font-size: 80%;">10% Discount for 3 or more cards<br>20% Discount for 5 or more cards</p>
+                  <form action="/submission" method="post">
+                    <div class="form-group">
+                      <!-- Javascript to display text box for input of personalised message if this option is chosen on the drop-down menu -->
+                      <script type="text/javascript">
+                        function EnableDisableTextBox4(card_options) {
+                          var selectedValue = card_options.options[card_options.selectedIndex].id;
+                          var personalised_message = document.getElementById("personalised_messageKKCS:W2019");
+                          if (selectedValue == "print_plusKKCS:W2019") {
+                            personalised_message.style.display = "block";
+                          }
+                          else {
+                            personalised_message.style.display = "none";
+                          }
+                        }
+                      </script>
+                      <select name="card_options" id="card_options" onchange="EnableDisableTextBox4(this)">
+                        <option disabled selected value="select">Select a style</option>
+                        <option value="print" id="printKKCS:W2019">Print</option>
+                        <option value="print_plus" id="print_plusKKCS:W2019">Print Plus Personalised Message</option>
+                      </select><br>
+                      <input autocomplete="off" autofocus class="form-control" style="display: none;" id="personalised_messageKKCS:W2019" name="personalised_message"
+                             placeholder="Message - max 50 characters" type="text" maxlength="50">
+                      <select name="quantity" id="quantity">
+                        <option disabled selected value="quantity">Quantity</option>
+                        {% for number in quantity %}
+                          <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}
+                      </select><br>
+                      <input name="id" type="hidden" value="KKCS:W2019">
+                      <input name="cost" type="hidden" value="2.75">
+                      <input name="img_src" type="hidden" value="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P10.jpeg">
+                      <button class="btn btn-primary mt-2" type="submit">Add to basket</button>
+                    </div>
+                  </form>
+                  <br><p style="font-size: 80%;"><i>'Print Plus Personalised Message' refers to the addition of text to the print itself - an example
+                  is photographed near the top of the page reading 'BOY DO WE HAVE NEWS FOR YOU!'. Jess will add your requested text herself before
+                  printing your card.</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3 item_break"></div>
+
+          <!-- Item 5 -->
+          <div class="row">
+            <div class="col-md-4">
+              <div class="container">
+                <img class="img-fluid rounded my-3 image" src="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P13.jpeg"
+                alt="Black ink line drawing with added grey pen on white paper of a someone walking away from the viewer down a street, with papers in
+                    their hand. They are wearing jeans, trainers and a jacket with the words ‘BUT LEARN TO TRUST YOUR HEART’ written on a sewn on fabric
+                    on the back of the jacket.">
+                <div class="overlay">
+                  <img class="img-fluid rounded my-3 overlayimage" src="/static/SHOP/heart_card.jpg"
+                  alt="Photograph of learn to trust your heart illustration on card.">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <br><h5 style="background-color: grey; color: white;"><em>BUT LEARN TO TRUST YOUR HEART</em>  2019</h5>
+              <div class="row">
+                <div class="col-md-6">
+                  <p>Black ink line drawing with added grey pen on white paper of a student walking down a street, with papers in
+                     their hand. The sewn on fabric on their jacket reads ‘BUT LEARN TO TRUST YOUR HEART’.</p>
+                  <p style="font-size: 80%;">
+                    - Print framed in a 6 by 4 inches, 380gsm, cream card.<br><br>
+                    - The inside is left blank, for you to add your own message. Add message at checkout to send direct, or leave blank and send to
+                    yourself with a spare envelope.<br><br>
+                    - Printed on demand to reduce waste.
+                  </p>
+                </div>
+                <div class="col-md-6">
+                  <h6>£2.75</h6>
+                  <p style="font-size: 80%;">10% Discount for 3 or more cards<br>20% Discount for 5 or more cards</p>
+                  <form action="/submission" method="post">
+                    <div class="form-group">
+                      <!-- Javascript to display text box for input of personalised message if this option is chosen on the drop-down menu -->
+                      <script type="text/javascript">
+                        function EnableDisableTextBox5(card_options) {
+                          var selectedValue = card_options.options[card_options.selectedIndex].id;
+                          var personalised_message = document.getElementById("personalised_messageLTTYH2019");
+                          if (selectedValue == "print_plusLTTYH2019") {
+                            personalised_message.style.display = "block";
+                          }
+                          else {
+                            personalised_message.style.display = "none";
+                          }
+                        }
+                      </script>
+                      <select name="card_options" id="card_options" onchange="EnableDisableTextBox5(this)">
+                        <option disabled selected value="select">Select a style</option>
+                        <option value="print" id="printLTTYH2019">Print</option>
+                        <option value="print_plus" id="print_plusLTTYH2019">Print Plus Personalised Message</option>
+                      </select><br>
+                      <input autocomplete="off" autofocus class="form-control" style="display: none;" id="personalised_messageLTTYH2019" name="personalised_message"
+                             placeholder="Message - max 50 characters" type="text" maxlength="50">
+                      <select name="quantity" id="quantity">
+                        <option disabled selected value="quantity">Quantity</option>
+                        {% for number in quantity %}
+                          <option value="{{ number }}">{{ number }}</option>
+                        {% endfor %}
+                      </select><br>
+                      <input name="id" type="hidden" value="LTTYH2019">
+                      <input name="cost" type="hidden" value="2.75">
+                      <input name="img_src" type="hidden" value="/static/WORK/PEOPLE&PLACES-LONDON/PPL_P13.jpeg">
+                      <button class="btn btn-primary mt-2" type="submit">Add to basket</button>
+                    </div>
+                  </form>
+                  <br><p style="font-size: 80%;"><i>'Print Plus Personalised Message' refers to the addition of text to the print itself - an example
+                  is photographed near the top of the page reading 'BOY DO WE HAVE NEWS FOR YOU!'. Jess will add your requested text herself before
+                  printing your card.</i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3 item_break"></div>
+
+          {% if item != None %}
+            <div class="row" style="text-align: center; background-color: yellow;">
+              <a href="/BASKET">
+                <h3>VIEW BASKET AND PROCEED TO CHECKOUT</h3>
+              </a>
+            </div>
+            <div class="row my-3 item_break"></div>
+         {% endif %}
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

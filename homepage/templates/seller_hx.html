@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Shopping Cart Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Own Style Sheet using CSS -->
+    <link href="static/stylesshop.css" rel="stylesheet">
+    <link href="static/stylessitewide.css" rel="stylesheet">
+
+    <title>JESSKETCHES: SELLER SECTION</title>
+
+    <!-- Linking JESSKETCHES logo for the favicon -->
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </head>
+  <body>
+    <!-- Top navigation bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/static/jsklogo.png" width="40" height="40" class="d-inline-block align-top" alt="JESSKETCHES logo, homepage link" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                WORK
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/ACCEPTANCE">ACCEPTANCE</a></li>
+                <li><a class="dropdown-item" href="/C19">C19</a></li>
+                <li><a class="dropdown-item" href="/COMMISSIONS">COMMISSIONS</a></li>
+                <li><a class="dropdown-item" href="/DREAMLAND">DREAMLAND</a></li>
+                <li><a class="dropdown-item" href="/FASHUN">FASHUN</a></li>
+                <li><a class="dropdown-item" href="/FLORAL+">FLORAL+</a></li>
+                <li><a class="dropdown-item" href="/INTERIORS">INTERIORS</a></li>
+                <li><a class="dropdown-item" href="/JUSTJUMP">JUST JUMP</a></li>
+                <li><a class="dropdown-item" href="/PEOPLE&PLACES:LONDON">PEOPLE&PLACES: LONDON</a></li>
+                <li><a class="dropdown-item" href="/SOMEBODIES">SOMEBODIES</a></li>
+                <li><a class="dropdown-item" href="/TATTOO">TATTOO</a></li>
+                <li><a class="dropdown-item" href="/THREAD">THREAD</a></li>
+                <li><a class="dropdown-item" href="/X(R)PLORATION">X(R)PLORATION</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ABOUT_ME">ABOUT ME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/CONTACT">CONTACT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/SHOP">SHOP</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            <li class="nav-item dropdown ml-1 mr-5">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkLogIn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLinkLogIn">
+                <li><a class="dropdown-item" href="/LOGOUT">LOG OUT</a></li>
+                <li class="dropdown-header">Currently logged in as JESSKETCHES</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Fixed footer link to instagram page -->
+    <ul class="nav justify-content-end fixed-bottom">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.instagram.com/jess.ketches/">
+          <i class="bi bi-instagram" role="img" aria-label="Instagram Link" style="font-size:1.5rem;"></i>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Title of page -->
+    <div class="container-fluid">
+      <div class="row">
+        <h1 class="my-5" style="background-color: yellow;">ORDERS READY TO POST</h1>
+        {% if not orders_to_post %}
+          <h3 id="finished" style="background-color: yellow;">Congratulations you've completed all posting for now! :)</h3>
+        </div>
+        {% else %}
+      </div>
+      <div class="row">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="timestamp">Time of Order</th>
+              <th scope="col" class="checkout_reference">Order Reference</th>
+              <th scope="col" class="card_references">Card Reference(s)</th>
+              <th scope="col" class="postal_address">Postal Address</th>
+              <th scope="col" class="total_paid">Total Paid</th>
+              <th scope="col" class="checkout_email">Checkout Email</th>
+              <th scope="col" class="confirm_posted">Posted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through the database entries to display them in this table -->
+            {% for orders_to_post in orders_to_post %}
+              <tr>
+                <td class="timestamp">{{ orders_to_post.timestamp }}</td>
+                <td class="checkout_reference">{{ orders_to_post.checkout_reference }}</td>
+                <td class="card_references">{{ orders_to_post.card_references }}</td>
+                <td class="postal_address">
+                  <b>{{ orders_to_post.full_name }}</b><br>
+                  {{ orders_to_post.street_number_name }} {{ orders_to_post.street }}<br>
+                  {{ orders_to_post.city }}<br>
+                  {{ orders_to_post.postcode }}<br>
+                  {{ orders_to_post.country }}
+                </td>
+                <td class="total_paid">£{{ orders_to_post.total_paid }}</td>
+                <td class="checkout_email">{{ orders_to_post.checkout_email }}</td>
+                <td class="confirm_posted">
+                  <form action="/SELLER" method="post">
+                    <input name="checkout_reference" type="hidden" value="{{ orders_to_post.checkout_reference }}">
+                    <input name="card_references" type="hidden" value="{{ orders_to_post.card_references }}">
+                    <input name="checkout_email" type="hidden" value="{{ orders_to_post.checkout_email }}">
+                    <input name="full_name" type="hidden" value="{{ orders_to_post.full_name }}">
+                    <input name="street_number_name" type="hidden" value="{{ orders_to_post.street_number_name }}">
+                    <input name="street" type="hidden" value="{{ orders_to_post.street }}">
+                    <input name="city" type="hidden" value="{{ orders_to_post.city }}">
+                    <input name="postcode" type="hidden" value="{{ orders_to_post.postcode }}">
+                    <input name="country" type="hidden" value="{{ orders_to_post.country }}">
+                    <input name="total_paid" type="hidden" value="{{ orders_to_post.total_paid }}">
+                    <button type="submit" id="post" class="btn btn-secondary">SEND CONFIRMATION OF POSTAGE TO BUYER</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+      <div class="row">
+        <h1 class="my-5" style="background-color: yellow;">ALL ORDERS</h1>
+      </div>
+      <div class="row">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="timestamp">Time of Order</th>
+              <th scope="col" class="checkout_reference">Order Reference</th>
+              <th scope="col" class="card_references">Card Reference(s)</th>
+              <th scope="col" class="full_name">Full Name</th>
+              <th scope="col" class="street_number_name">Number/Name</th>
+              <th scope="col" class="street">Street</th>
+              <th scope="col" class="city">City</th>
+              <th scope="col" class="postcode">Postcode</th>
+              <th scope="col" class="country">Country</th>
+              <th scope="col" class="total_paid">Total Paid</th>
+              <th scope="col" class="checkout_email">Checkout Email</th>
+              <th scope="col" class="confirm_posted">Posted</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through the database entries to display them in this table -->
+            {% for all_orders in all_orders %}
+              <tr>
+                <td class="timestamp">{{ all_orders.timestamp }}</td>
+                <td class="checkout_reference">{{ all_orders.checkout_reference }}</td>
+                <td class="card_references">{{ all_orders.card_references }}</td>
+                <td class="full_name">{{ all_orders.full_name }}</td>
+                <td class="street_number_name">{{ all_orders.street_number_name }}</td>
+                <td class="street">{{ all_orders.street }}</td>
+                <td class="city">{{ all_orders.city }}</td>
+                <td class="postcode">{{ all_orders.postcode }}</td>
+                <td class="country">{{ all_orders.country }}</td>
+                <td class="total_paid">£{{ all_orders.total_paid }}</td>
+                <td class="checkout_email">{{ all_orders.checkout_email }}</td>
+                <td class="posted">{{ all_orders.posted }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <img src="/static/jskname.png" alt="JESSKETCHES" class="img-fluid">
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

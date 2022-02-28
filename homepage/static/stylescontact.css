@@ -1,0 +1,118 @@
+/* Formatting text on page */
+
+p {
+  font-family: "Courier New", Monospace;
+}
+
+h1 {
+  font-family: "Helvetica", sans-serif;
+}
+
+
+/* Fade in animation for entire page once loaded, for a smooth transition */
+
+body {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* Altering the size of items on the page depending on the size of the user's screen */
+/* Source: https://bootstrapcreative.com/can-adjust-text-size-bootstrap-responsive-design/ */
+
+/* Extra small devices (portrait phones, less than 544px) - no media query as bootstrap is mobile first */
+
+.contact {font-size:1rem; background-color: yellow; border-radius: 25px;} /*1rem = 16px*/
+.chat {font-size:2.5rem;}
+.eyes {width: 50px; height: auto;}
+.biro {width: 50px; height: auto;}
+
+/* Bootstrap breakpoints */
+/* Small devices (landscape phones, 544px and up) */
+
+@media (min-width: 544px) {
+  .contact {font-size:2rem;} /*1rem = 16px*/
+  .chat {font-size:2.5rem;}
+  .eyes {width: 50px;}
+  .biro {width: 50px; height: auto;}
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media (min-width: 768px) {
+  .contact {font-size:2.5rem;} /*1rem = 16px*/
+  .chat {font-size:2.5rem;}
+  .eyes {width: 100px;}
+  .biro {width: 70px; height: auto;}
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+  .contact {font-size:3rem;} /*1rem = 16px*/
+  .chat {font-size:3rem;}
+  .eyes {width: 100px;}
+  .biro {width: 80px; height: auto;}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+  .contact {font-size:4rem;} /*1rem = 16px*/
+  .chat {font-size:4rem;}
+  .eyes {max-width: 200px;}
+  .biro {width: 100px; height: auto;}
+}
+
+
+/* Formatting photograph and JESSKETCHES image for animation on 'ABOUT ME' page */
+
+#photo {
+  width: 20%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10%;
+}
+
+#jk {
+  z-index: -1;
+  position: relative;
+}
+
+
+/* Formatting images on 'CONTACT' page to appear only when their respective link is hovered over */
+
+.contact img {
+  opacity: 0;
+}
+
+#mail:hover .biro {
+  opacity: 1;
+  transition: .6s ease;
+}
+
+#insta:hover .eyes {
+  opacity: 1;
+  transition: .6s ease;
+}
+
+
+/* Flipping both left images so that they mirror the identical right image */
+
+#eyesl, #birol {
+  transform: scaleX(-1)
+}

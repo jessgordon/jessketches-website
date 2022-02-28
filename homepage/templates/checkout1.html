@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    <!-- Shopping Cart Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Own Style Sheet using CSS -->
+    <link href="static/stylesshop.css" rel="stylesheet">
+    <link href="static/stylessitewide.css" rel="stylesheet">
+
+    <title>JESSKETCHES: CHECKOUT</title>
+
+    <!-- Linking JESSKETCHES logo for the favicon -->
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </head>
+  <body>
+    <!-- Top navigation bar -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-transparent flex-wrap">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/static/jsklogo.png" width="40" height="40" class="d-inline-block align-top" alt="JESSKETCHES logo, homepage link" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav">
+            <li class="nav-item dropdown mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                WORK
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="/ACCEPTANCE">ACCEPTANCE</a></li>
+                <li><a class="dropdown-item" href="/C19">C19</a></li>
+                <li><a class="dropdown-item" href="/COMMISSIONS">COMMISSIONS</a></li>
+                <li><a class="dropdown-item" href="/DREAMLAND">DREAMLAND</a></li>
+                <li><a class="dropdown-item" href="/FASHUN">FASHUN</a></li>
+                <li><a class="dropdown-item" href="/FLORAL+">FLORAL+</a></li>
+                <li><a class="dropdown-item" href="/INTERIORS">INTERIORS</a></li>
+                <li><a class="dropdown-item" href="/JUSTJUMP">JUST JUMP</a></li>
+                <li><a class="dropdown-item" href="/PEOPLE&PLACES:LONDON">PEOPLE&PLACES: LONDON</a></li>
+                <li><a class="dropdown-item" href="/SOMEBODIES">SOMEBODIES</a></li>
+                <li><a class="dropdown-item" href="/TATTOO">TATTOO</a></li>
+                <li><a class="dropdown-item" href="/THREAD">THREAD</a></li>
+                <li><a class="dropdown-item" href="/X(R)PLORATION">X(R)PLORATION</a></li>
+              </ul>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/ABOUT_ME">ABOUT ME</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" href="/CONTACT">CONTACT</a>
+            </li>
+            <li class="nav-item mx-1">
+              <a class="nav-link" aria-current="page" href="/SHOP">SHOP</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+            {% if item != None %}
+              <li class="nav-item mx-1">
+                <a class="nav-link" href="/BASKET">
+                  <i class="bi bi-basket2-fill"></i>
+                  <span class='badge badge-warning' id='lblCartCount'>{{ item }}</span>
+                </a>
+              </li>
+            {% endif %}
+            <li class="nav-item dropdown ml-1 mr-5">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkLogIn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLinkLogIn">
+                {% if item != None %}
+                  <li><a class="dropdown-item" href="/BASKET">VIEW BASKET</a></li>
+                  <div class="dropdown-divider"></div>
+                {% endif %}
+                {% if logged_in == "no" %}
+                  <li><a class="dropdown-item" href="/LOGIN">LOG IN</a></li>
+                  <li><a class="dropdown-item" href="/REGISTER">REGISTER</a></li>
+                {% else %}
+                  <li><a class="dropdown-item" href="/BUYER_HX">VIEW SHOPPING HISTORY</a></li>
+                  <li><a class="dropdown-item" href="/LOGOUT">LOG OUT</a></li>
+                  <li class="dropdown-header">Currently logged in as {{ name }}</li>
+                {% endif %}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Fixed footer link to instagram page -->
+    <ul class="nav justify-content-end fixed-bottom">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.instagram.com/jess.ketches/">
+          <i class="bi bi-instagram" role="img" aria-label="Instagram Link" style="font-size:1.5rem;"></i>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Title of page -->
+    <div class="container" style="width: 70%; margin: auto;">
+      {% if checkout == "1a" %}
+        <div class="row progress-bar">
+          <div class="col-3 progress"></div>
+          <div class="col-9"></div>
+        </div><br>
+        <h1>CHECKOUT</h1><br>
+        <div class="row">
+          <div class="col-6">
+            <a class="btn btn-secondary" id="PostToUser" href="/CheckoutToUser" role="button">
+              POST ALL ORDERS TO ME PLEASE!
+            </a>
+          </div>
+          <div class="col-6">
+            <a class="btn btn-secondary" id="PostToOther" href="/CheckoutToOther" role="button">
+              I WANT TO ADD A MESSAGE INSIDE MY CARDS AND SEND DIRECTLY TO THE ADRESSEE(S)
+            </a>
+          </div>
+        </div>
+      {% elif checkout == "1b" %}
+        <div class="row progress-bar">
+          <div class="col-6 progress"></div>
+          <div class="col-6"></div>
+        </div><br>
+        <div class="row"><h1>CHECKOUT</h1><br></div>
+        {% if logged_in == "yes" %}
+          <div class="row">
+            <form action="/CheckoutToUser" method="post">
+              <p>
+                {{ user.full_name }}<br>
+                {{ user.street_number_name }}, {{ user.street }}<br>
+                {{ user.city }}<br>
+                {{ user.postcode }}<br>
+                {{ user.country }}
+              </p>
+              <input name="registered_address" type="hidden" value="yes">
+              <button type="submit" class="btn btn-secondary">USE REGISTERED ADDRESS</button>
+            </form>
+            <hr class="rounded_divider my-3">
+            <h5>OR POST TO ANOTHER ADDRESS:</h5>
+            <hr class="rounded_divider mb-3 mt-2">
+          </div>
+        {% endif %}
+        <div class="row">
+          <form action="/CheckoutToUser" method="post">
+            <input name="registered_address" type="hidden" value="no">
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="full_name" placeholder="full name" type="text">
+            </div>
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="street_number_name" placeholder="street number or name of property" type="text">
+            </div>
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="street" placeholder="street" type="text">
+            </div>
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="city" placeholder="city" type="text">
+            </div>
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="postcode" placeholder="postcode" type="text">
+            </div>
+            <div class="form-group">
+              <input autocomplete="off" class="form-control" name="country" placeholder="country" type="text">
+            </div>
+            <button class="btn btn-secondary" type="submit">NEXT</button>
+          </form>
+        </div>
+        <div>
+          <img src="/static/jskname.png" alt="JESSKETCHES" class="container-fluid">
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  </body>
+</html>

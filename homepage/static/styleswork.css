@@ -1,0 +1,22 @@
+/* Formatting text on page */
+
+html {
+  font-family: "Helvetica", sans-serif;
+}
+
+/* Formatting the yellow divider used on some pages of work */
+
+.item_break{
+  height: 5px;
+  border-radius: 3px;
+  background-color: yellow;
+}
+
+/* Formatting headers for artwork to decrease in size when on a small viewport */
+
+/* Small devices (landscape phones, 544px and up) */
+
+@media (max-width: 544px) {
+  h5{font-size: 80%;}
+  p{font-size: 80%;}
+}

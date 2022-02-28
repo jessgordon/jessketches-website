@@ -1,0 +1,228 @@
+/* Formatting text on page */
+
+html {
+  font-family: "Helvetica", sans-serif;
+}
+
+
+/* Formatting forms within the shop */
+
+input[type=text] {
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid yellow;
+}
+
+select {
+  padding: 12px;
+  margin: 8px 0;
+  background-color: transparent;
+  border: transparent;
+}
+
+
+/* Formatting buttons within the shop */
+
+/* unvisited button */
+.btn, .styled_button {
+  background-color: black;
+  border: black;
+  color: white;
+}
+
+/* mouse over button */
+.btn:hover, .styled_button:hover {
+  background-color: grey;
+  color: white;
+}
+
+/* selected button */
+.btn:active, styled_button:active {
+  background-color: yellow;
+  color: white;
+}
+
+/* Ammending colour of the button text for buttons created using 'a' not 'button' tag */
+#reg, #check, #PostToUser, #PostToOther, #guest, #post{
+  color:white;
+}
+
+
+/* Formatting the shopping cart */
+
+#lblCartCount {
+    font-size: 12px;
+    background: yellow;
+    color: grey;
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -10px;
+}
+
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+
+/* Formatting the dropdown card when checkout button is clicked on the basket page */
+
+.card{
+  background-color: yellow;
+}
+
+
+/* Formatting a divider used in checkout1.html */
+
+.rounded_divider {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
+  color: white;
+}
+
+
+/* Formatting form on checkout2.html so that it has a minimum size to keep inputted content easily readible */
+
+.address_message{
+  min-width: 150px;
+}
+
+
+/* Formatting buttons used in checkout1.html to be very large and text size responsive */
+
+#PostToUser, #PostToOther{
+  font-size: 200%;
+  height: 300px;
+  /* Flex text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  #PostToUser, #PostToOther{font-size: 100%;}
+}
+
+
+/* Formatting the text inside the post button on seller_hx.html to wrap */
+
+#post{
+white-space: normal;
+word-wrap: break-word;
+}
+
+
+/* Creating a yellow progress bar at the top of the checkout pages */
+
+.progress{
+  background-color: yellow;
+  height: 100%;
+}
+
+.progress-bar{
+  height: 20px;
+  box-shadow: 5px 5px 5px grey;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+
+/* #### shop.html specific CSS #### */
+/* Formating product images so that when hovered over, an image of the card is shown instead of the artwork only */
+
+/* Container needed to position the image overlays */
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* Format for original image */
+.image {
+  width: 100%;
+  height: auto;
+}
+
+/* Format for overlay image */
+.overlayimage {
+  height: 90%;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .6s ease;
+  background-color: white;
+  border-radius: 3px;
+}
+
+/* Overlay image to fade in when original image is hovered over */
+.container:hover .overlay {
+  opacity: 1;
+}
+
+
+/* Formatting the yellow divider in between items in shop.html */
+
+.item_break{
+  height: 5px;
+  border-radius: 3px;
+  background-color: yellow;
+}
+
+
+/* Formatting the envelope and arrows at the top of the shop page ready to be animated as user scrolls */
+
+#envelope {
+  z-index: -1;
+  position: relative;
+}
+
+#arrowl {
+  z-index: 1;
+  position: relative;
+}
+
+#arrowr {
+  z-index: 2;
+  position: relative;
+}
+
+
+/* Adding a pink strip across the shop.html page as the user scrolls through the People&Places: London section */
+
+#pink_background  {
+  background-image: url("background_line.png");
+  background-color: white;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+
+/* Adding a translucent white background to the People&Places: London card items so the pink strip is still just visible */
+#PPLitems {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Making the blurb slightly smaller on smaller screens to keep in size with the surrounding images */
+@media (max-width: 544px) {
+  #blurb{font-size: 90%;}
+}
+
+/* #### end of shop.html specific CSS #### */

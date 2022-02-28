@@ -1,0 +1,109 @@
+<div class="container" style="width: 90%">
+  <div class="row">
+    <p>
+      Dear Jess,<br><br>
+      CONGRATULATIONS! You have a new order, made by <b>{{ name }}</b>.<br>
+      Please see order summary below, and <a href="#">log in</a> to confirm when you have shipped the order.<br>
+      <strong>Please remember</strong> buyers are expecting their products to be dispatched within 1–2 business days from their order date.
+    </p>
+    <hr class="dashed" style="border-top: 3px dashed grey;">
+  </div>
+  <div class="row">
+    <p style="text-align: right;">
+      <b>ORDER REFERENCE: {{ checkout.0.checkout_reference }}</b><br>
+      Placed on {{ date }}
+    </p>
+  </div>
+  <div class="row">
+    <h3 style="background-color: yellow; font-weight: bold; border-radius: 3px"> ORDER SUMMARY</h3>
+  </div>
+  {% for checkout in checkout %}
+    <div class="row">
+      <p>
+        <b>POSTAL ADDRESS:</b>
+        {{ checkout.full_name }}, {{ checkout.street_number_name }} {{ checkout.street }}, {{ checkout.city }}, {{ checkout.postcode }}, {{ checkout.country }}
+      </p>
+      <table class="content-table" style="border-collapse: collapse; margin: 25px 0; font-size: 0.9em; max-width: 100%; border-radius: 5px 5px 0 0; overflow: hidden; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);">
+        <thead>
+          <tr style="background-color: black; color: white; font-weight: bold;" bgcolor="black">
+            <th scope="col" class="item_img" style="padding: 12px 15px; text-align: left;" align="left"></th>
+            <th scope="col" class="item_name" style="padding: 12px 15px; text-align: left;" align="left">Item</th>
+            <th scope="col" class="item_front_text" style="padding: 12px 15px; text-align: left;" align="left">Optional Personalised Text</th>
+            <th scope="col" class="item_message" style="padding: 12px 15px; text-align: left;" align="left">Optional Message</th>
+            <th scope="col" class="cost" style="padding: 12px 15px; text-align: left;" align="left">Price</th>
+            <th scope="col" class="quantity" style="padding: 12px 15px; text-align: left;" align="left">Quantity</th>
+            <th scope="col" class="total" style="padding: 12px 15px; text-align: left;" align="left">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop through the database entries to display them in this table -->
+          {% for basket in basket %}
+            {% if checkout.full_name == basket.full_name and checkout.street_number_name == basket.street_number_name and checkout.street == basket.street and checkout.city == basket.city and checkout.postcode == basket.postcode and checkout.country == basket.country %}
+              <tr style="border-bottom: 2px solid black;">
+                <td class="item_img" style="padding: 12px 15px; text-align: left;" align="left">
+                  <a href="#">
+                    <img src="cid:{{ basket.item_name }}" style="max-width: 200px; height: auto;">
+                  </a>
+                </td>
+                <td class="item_name" style="padding: 12px 15px; text-align: left;" align="left">
+                  {{ basket.item_name }}:
+                  {% if basket.item_option == print_plus %}
+                    Print Plus Personalised Message
+                  {% else %}
+                    Print
+                  {% endif %}
+                </td>
+                <td class="item_front_text" style="padding: 12px 15px; text-align: left;" align="left">{{ basket.item_front_text }}</td>
+                <td class="message" style="padding: 12px 15px; text-align: left;" align="left">{{ basket.item_internal_text }}</td>
+                <td class="cost" style="padding: 12px 15px; text-align: left;" align="left">£{{ basket.cost }}</td>
+                <td class="quantity" style="padding: 12px 15px; text-align: left;" align="left">{{ basket.quantity }}</td>
+                <td class="total" style="padding: 12px 15px; text-align: left;" align="left">£{{ basket.total_cost }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr style="border-bottom: 1px solid white;">
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">Delivery</td>
+            <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">£{{ checkout.delivery }}</td>
+          </tr>
+          {% if checkout.discount != "none" %}
+            <tr style="border-bottom: 1px solid white;">
+              <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+              <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+              <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+              <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+              <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+              <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">{{ checkout.discount }} off</td>
+              <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">-£{{ checkout.reduction }}</td>
+            </tr>
+          {% endif %}
+          <tr style="border-bottom: 1px solid white;">
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td style="padding: 12px 15px; text-align: left;" align="left"></td>
+            <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">TOTAL</td>
+            <td class="summary" style="background-color: grey; color: white; padding: 12px 15px; text-align: left;" align="left" bgcolor="grey">£{{ checkout.total_paid }}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div><br>
+  {% endfor %}
+  <div class="row">
+    <a href="#">
+      <img src="cid:jskname" alt="link to JESSKETCHES website" id="jskname" style="max-width: 100%; height: auto;">
+    </a>
+  </div>
+  <div class="row center-text" style="text-align: center;">
+    <a href="https://www.instagram.com/jess.ketches/">
+      <img src="cid:instaicon" alt="link to jessketches instagram profile" style="max-width: 24px; height: auto;">
+    </a>
+  </div>
+</div>
